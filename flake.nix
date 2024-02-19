@@ -15,20 +15,14 @@
     devShell."${system}" = with pkgs;
       mkShell {
         packages =
-          [helix]
-          ++ (with haskellPackages; [
-            ghc
-            cabal-install
-            stack
-            ghcid
-            doctest
-            haskell-language-server
-            implicit-hie
-          ]);
-
-        shellHook = ''
-          source ${pkgs.cabal-install}/share/bash-completion/completions/cabal
-        '';
+          [
+          cargo
+          rustc
+          rust-analyzer
+          lldb
+          
+          helix
+          ];
       };
 
     formatter.${system} = pkgs.alejandra;
