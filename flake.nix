@@ -15,10 +15,8 @@
     devShell."${system}" = with pkgs;
       mkShell {
         packages =
-          [
-            helix
-          ]
-          ++ (with haskell.packages.ghc946; [
+          [helix]
+          ++ (with haskellPackages; [
             ghc
             cabal-install
             stack
@@ -27,6 +25,10 @@
             haskell-language-server
             implicit-hie
           ]);
+
+        shellHook = ''
+          source ${pkgs.cabal-install}/share/bash-completion/completions/cabal
+        '';
       };
 
     formatter.${system} = pkgs.alejandra;
